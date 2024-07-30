@@ -63,13 +63,13 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>
+        <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>
           Convert to upper case
         </button>
-        <button className="btn btn-secondary mx-3" onClick={handleLowClick}>
+        <button className="btn btn-secondary mx-1 my-1" onClick={handleLowClick}>
           Convert to lower case
         </button>
-        <button className="btn btn-warning" onClick={handleClearClick}>
+        <button className="btn btn-warning mx-1 my-1" onClick={handleClearClick}>
           Clear Text
         </button>
       </div>
@@ -79,7 +79,7 @@ export default function TextForm(props) {
         <p>
           {text.split(" ").filter(item => item.trim() !== '').length} words and {text.length} characters
         </p>
-        <p>{text.split(" ").length * 0.008} Minutes read</p>
+        <p>{text.split(" ").filter(item => item.trim() !== '').length * 0.008} Minutes read</p>
         <h3>Preview</h3>
         <p>
           {text === ""

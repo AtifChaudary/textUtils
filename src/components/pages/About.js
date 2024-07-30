@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function About() {
-  const [myStyle, setMyStyle] = useState({
-    backgroundColor: "white",
-    color: "black",
-  });
-  const [btnText, setBtnText] = useState("Enable Dark Mode");
+export default function About(props) {
+  let myStyle = {
+    color: props.mode === 'dark'? 'white': '#042743',
+    backgroundColor: props.mode === 'dark'? 'rgb(36 74 104)': 'white'
+
+  }
 
   return (
     <>
-      <div className="container" style={myStyle}>
+      <div className="container" style={{color: props.mode === 'dark'? 'white': 'black'}}>
         <h1 className="mt-5 mb-5">About Us</h1>
         <div className="accordion accordion-flush" id="accordionFlushExample">
           <div className="accordion-item">
