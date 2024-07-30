@@ -1,16 +1,57 @@
 import "./App.css";
-// import TextForm from "./components/forms/TextForm";
+import Alert from "./components/alerts/Alert";
+import TextForm from "./components/forms/TextForm";
 import Navbar from "./components/navbar/Navbar";
-import About from "./components/pages/About";
+// import About from "./components/pages/About";
+import React, { useState } from "react";
 
 function App() {
+  const [mode, setMode] = useState("light");
+  const [btnText, setbtnText] = useState("Enable DarkMode");
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
+
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      setbtnText("Enable LightMode");
+      document.body.style.backgroundColor = "#042743";
+      document.body.style.color = "white";
+      showAlert("Dark mode has been enabled", "success");
+    } else {
+      setMode("light");
+      setbtnText("Enable DarkMode");
+      document.body.style.backgroundColor = "white";
+      document.body.style.color = "black";
+      showAlert("Light mode has been enabled", "success");
+    }
+  };
+
   return (
     <>
-      <Navbar title="TextUtils"/>
-      {/* <Navbar /> */}
+      <Navbar
+        title="TextUtils"
+        mode={mode}
+        toggleMode={toggleMode}
+        btnText={btnText}
+      />
+      <Alert alert={alert} />
       <div className="container mt-5 my-3">
-      {/* <TextForm heading="Enter the text to Analyze" /> */}
-      <About/>
+        <TextForm
+          heading={"Enter the text to Analyze"}
+          mode={mode}
+          showAlert={showAlert}
+        />
+        {/* <About/> */}
       </div>
     </>
   );

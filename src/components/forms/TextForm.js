@@ -3,23 +3,28 @@ import React, { useState, useRef } from "react";
 export default function TextForm(props) {
   const textRef = useRef(null);
   const buttonRef = useRef(null);
-  
-  const handleUpClick = (props) => {
+
+  const handleUpClick = () => {
     setText(text.toUpperCase());
+    props.showAlert("Coverted to uppercase", "success");
   };
 
-  const handleLowClick = (props) => {
+  const handleLowClick = () => {
     setText(text.toLowerCase());
+    props.showAlert("Coverted to lowercase", "success");
   };
 
-  const handleClearClick = (props) => {
-    setText('');
+  const handleClearClick = () => {
+    setText("");
+    props.showAlert("Text has been cleared", "success");
   };
 
-  const convertToBold = (props) => {
+  const convertToBold = () => {
     if (textRef.current && buttonRef.current) {
-      buttonRef.current.style.opacity = buttonRef.current.style.opacity === '1' ? '0.5' : '1';
-      textRef.current.style.fontWeight = textRef.current.style.fontWeight === 'bold' ? 'normal' : 'bold';
+      buttonRef.current.style.opacity =
+        buttonRef.current.style.opacity === "1" ? "0.5" : "1";
+      textRef.current.style.fontWeight =
+        textRef.current.style.fontWeight === "bold" ? "normal" : "bold";
     }
   };
 
@@ -28,18 +33,28 @@ export default function TextForm(props) {
   };
 
   const [text, setText] = useState("");
-  // text = "new text"; //Wrong way to change the state
-  // setText("new text"); // Correct way to change the state
 
   return (
     <>
       <div className="container">
         <h1>{props.heading}</h1>
         <div className="mb-3">
-          <button className="btn btn-secondary" onClick={convertToBold} ref={buttonRef} style={{opacity: 0.5}}>B</button>
+          <button
+            className="btn btn-secondary"
+            onClick={convertToBold}
+            ref={buttonRef}
+            style={{ opacity: 0.5 }}
+          >
+            B
+          </button>
         </div>
         <div className="mb-3">
           <textarea
+            atif={props.mode}
+            style={{
+              backgroundColor: props.mode === "dark" ? "#042743" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
             ref={textRef}
             className="form-control"
             value={text}
@@ -62,11 +77,15 @@ export default function TextForm(props) {
       <div className="container mt-5">
         <h2>Your text summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {text.split(" ").filter(item => item.trim() !== '').length} words and {text.length} characters
         </p>
         <p>{text.split(" ").length * 0.008} Minutes read</p>
         <h3>Preview</h3>
-        <p>{text}</p>
+        <p>
+          {text === ""
+            ? "Enter something in the textbox above to preview it here"
+            : text}
+        </p>
       </div>
     </>
   );

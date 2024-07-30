@@ -7,23 +7,6 @@ export default function About() {
   });
   const [btnText, setBtnText] = useState("Enable Dark Mode");
 
-  const handleMode = () => {
-    if (myStyle.color === "black") {
-      setMyStyle({
-        backgroundColor: "black",
-        color: "white",
-        border: '1px solid white',
-      });
-      setBtnText("Enable Light Mode");
-    }
-    else {
-      setMyStyle({
-        backgroundColor: "white",
-        color: "black",
-      });
-      setBtnText("Enable Dark Mode");
-    }
-  };
   return (
     <>
       <div className="container" style={myStyle}>
@@ -114,15 +97,6 @@ export default function About() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="container mb-2">
-          <button
-            type="button"
-            className="btn btn-primary mt-5 mb-5"
-            onClick={handleMode}
-          >
-            {btnText}
-          </button>
         </div>
       </div>
     </>
